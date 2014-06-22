@@ -8,6 +8,8 @@ public class Main {
 	/**
 	 * @param args
 	 */
+	static final int NUMBER_OF_RECIPE_ATTRIBUTE = 2;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method 
 		
@@ -70,6 +72,7 @@ public class Main {
 	/* 配列の先頭から順に、idが1,2,...と割り振られたRecipeオブジェクトの配列を生成し、それを返す
 	 * [オムライス, 親子丼, 杏仁豆腐]という仮引数を与えられたら
 	 * [<id:1, recipe_name:オムライス>, <id:2, recipe_name:親子丼>, <id:3, recipe_name:杏仁豆腐>]というオブジェクトの配列を返す
+	 * (仕様6：追加)Urlも追加する
 	 * */
 	public static ArrayList<Recipe> makeObjectFromArrayList(ArrayList<String> _arrayList)
 	{
@@ -78,8 +81,11 @@ public class Main {
 		
 		//返り値のリストに引数のリストをrecipe_nameとして持つRecipeオブジェクトを順に入れていく
 		for(int i=0; i<_arrayList.size(); i++){
-			String recipe_name = _arrayList.get(i);
-			Recipe rcp = new Recipe(i+1, recipe_name);
+			String line = _arrayList.get(i);
+			String[] recipe_attribute = line.split(", ", NUMBER_OF_RECIPE_ATTRIBUTE);
+			String recipe_name = recipe_attribute[0];	
+			String recipe_url  = recipe_attribute[1];
+			Recipe rcp = new Recipe(i+1, recipe_name, recipe_url);
 			recipe_object_array.add(rcp);
 		}
 		return recipe_object_array;
@@ -90,7 +96,7 @@ public class Main {
 	{
 		for(int i = 0; i<_arrayList.size(); i++){
 			Recipe rcp = _arrayList.get(i);
-			System.out.println(rcp.getId() + ": " + rcp.getRecipeName());
+			System.out.println(rcp.getId() + ": " + rcp.getRecipeName() + " " + rcp.getRecipeUrl());
 		}
 	}
 }
