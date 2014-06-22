@@ -68,6 +68,8 @@ public class Main {
 	}
 	
 	/* 配列の先頭から順に、idが1,2,...と割り振られたRecipeオブジェクトの配列を生成し、それを返す
+	 * [オムライス, 親子丼, 杏仁豆腐]という仮引数を与えられたら
+	 * [<id:1, recipe_name:オムライス>, <id:2, recipe_name:親子丼>, <id:3, recipe_name:杏仁豆腐>]というオブジェクトの配列を返す
 	 * */
 	public static ArrayList<Recipe> makeObjectFromArrayList(ArrayList<String> _arrayList)
 	{
@@ -75,8 +77,6 @@ public class Main {
 		ArrayList<Recipe> recipe_object_array = new ArrayList<Recipe>();
 		
 		//返り値のリストに引数のリストをrecipe_nameとして持つRecipeオブジェクトを順に入れていく
-		//[オムライス, 親子丼, 杏仁豆腐]という仮引数を与えられたら
-		//[<id:1, recipe_name:オムライス>, <id:2, recipe_name:親子丼>, <id:3, recipe_name:杏仁豆腐>]というオブジェクトの配列を返す
 		for(int i=0; i<_arrayList.size(); i++){
 			String recipe_name = _arrayList.get(i);
 			Recipe rcp = new Recipe(i+1, recipe_name);
@@ -85,7 +85,9 @@ public class Main {
 		return recipe_object_array;
 	}
 	
-	public static void printEachObjectOfArrayList(ArrayList<Recipe> _arrayList){
+	//recipeの配列の要素を1つずつ"id: recipe_name"の形式で出力する
+	public static void printEachObjectOfArrayList(ArrayList<Recipe> _arrayList)
+	{
 		for(int i = 0; i<_arrayList.size(); i++){
 			Recipe rcp = _arrayList.get(i);
 			System.out.println(rcp.getId() + ": " + rcp.getRecipeName());
